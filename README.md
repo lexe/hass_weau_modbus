@@ -5,7 +5,7 @@ Any RS485 kit should work, in this example I used:
 - M5Stack Atom S3 Lite
 - M5Stack RS485 Base
 
-I'm a big fan of the Atom's because of the fact you can power it in most cases from the device you're trying to integrate. It's also small so you can easily & safely leave it in the devices housing without having to worry about additional cable management.
+I'm a big fan of the Atom's because of the fact you can power it in most cases from the device you're trying to integrate. It's also small so you can easily & safely leave it in the device housing without having to worry about additional cable management.
 
 # Connection
 
