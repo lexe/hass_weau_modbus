@@ -23,4 +23,4 @@ The settings (P01-P05) were the next registers.
 
 # Notes
 
-This is still a work in progress. Some registers do not correspond with the official manual so I'm trying to decifer some more stuff but it's a start.
+This is still a work in progress. Some registers do not correspond with the official manual so I'm trying to decipher some more stuff but it's a start.
