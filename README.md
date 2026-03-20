@@ -1,9 +1,11 @@
 # Hardware
 
-Any RS485 kit should work, in this example used:
+Any RS485 kit should work, in this example I used:
 - W'eau 7.6 kW heat pump WFI-007
 - M5Stack Atom S3 Lite
 - M5Stack RS485 Base
+
+I'm a big fan of the Atom's because of the fact you can power it in most cases from the device you're trying to integrate. It's also small so you can easily & safely leave it in the devices housing without having to worry about additional cable management.
 
 # Connection
 
