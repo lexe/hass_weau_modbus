@@ -237,6 +237,7 @@ sensor:
       sorting_group_id: Diagnostic 
 
   - platform: modbus_controller
+    id: ac_voltage
     modbus_controller_id: hp
     register_type: holding
     name: "C18 AC voltage"
@@ -244,7 +245,7 @@ sensor:
     value_type: S_WORD
     unit_of_measurement: V
     web_server:
-      sorting_group_id: Diagnostic       
+      sorting_group_id: Diagnostic          
 
   - platform: modbus_controller
     modbus_controller_id: hp
@@ -279,6 +280,7 @@ sensor:
     modbus_controller_id: hp
     register_type: holding
     name: "C23 Heat pump current"
+    id: current
     address: 22
     value_type: S_WORD
     unit_of_measurement: A
@@ -358,7 +360,25 @@ sensor:
     web_server:
       sorting_group_id: Diagnostic
 
+  - platform: template
+    name: "Power"
+    id: power_calc
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 1
+    update_interval: 5s
+    lambda: |-
+      return id(ac_voltage).state * id(current).state;     
+
 binary_sensor:
+
+  - platform: modbus_controller
+    modbus_controller_id: hp
+    name: "C16 Cooling mode"
+    register_type: holding
+    address: 15
+    bitmask: 0x0002
 
   - platform: modbus_controller
     modbus_controller_id: hp
@@ -385,6 +405,7 @@ select:
       "Off": 0
       "Eco": 1
       "Boost": 2
+      "Cool": 4
     web_server:
       sorting_group_id: Parameters
 
@@ -407,6 +428,7 @@ number:
     id: hp_setpoint
     address: 31
     value_type: S_WORD
+    unit_of_measurement: °C
     min_value: 8
     max_value: 40
     step: 1
@@ -419,6 +441,7 @@ number:
     name: "P02 setpoint cooling"
     address: 32
     value_type: S_WORD
+    unit_of_measurement: °C
     min_value: 8
     max_value: 28
     step: 1    
@@ -431,6 +454,7 @@ number:
     name: "P03 setpoint auto"
     address: 33
     value_type: S_WORD
+    unit_of_measurement: °C
     min_value: 8
     max_value: 40
     step: 1    
@@ -443,8 +467,9 @@ number:
     name: "P04 water temperature difference before restart"
     address: 34
     value_type: S_WORD
+    unit_of_measurement: °C
     min_value: 1
     max_value: 18
     step: 1    
     web_server:
-      sorting_group_id: Parameters  
+      sorting_group_id: Parameters      
