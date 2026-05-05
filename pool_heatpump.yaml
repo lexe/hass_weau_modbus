@@ -56,7 +56,7 @@ web_server:
       sorting_weight: -20
     - id: Diagnostic
       name: "Diagnostic"  
-      sorting_weight: -10
+      sorting_weight: -10  
 
 # light
 light:
@@ -101,25 +101,29 @@ sensor:
     name: "C01 Ambient temperature"
     address: 0
     value_type: S_WORD
-    unit_of_measurement: C°
+    unit_of_measurement: °C
+    device_class: temperature
+    icon: mdi:thermometer   
     accuracy_decimals: 1
     filters:
       - multiply: 0.1   
     web_server:
-      sorting_group_id: Status                
+      sorting_group_id: Status   
 
   - platform: modbus_controller
     modbus_controller_id: hp
     register_type: holding
     name: "C02 Evaporator coil temperature"
     address: 1
-    value_type: S_WORD
-    web_server:
-      sorting_group_id: Diagnostic    
-    unit_of_measurement: C°
+    value_type: S_WORD   
+    unit_of_measurement: °C
+    device_class: temperature
+    icon: mdi:thermometer   
     accuracy_decimals: 1
     filters:
-      - multiply: 0.1           
+      - multiply: 0.1   
+    web_server:
+      sorting_group_id: Diagnostic               
 
   - platform: modbus_controller
     modbus_controller_id: hp
@@ -129,7 +133,9 @@ sensor:
     value_type: S_WORD
     web_server:
       sorting_group_id: Diagnostic   
-    unit_of_measurement: C°
+    unit_of_measurement: °C
+    device_class: temperature
+    icon: mdi:thermometer   
     accuracy_decimals: 1
     filters:
       - multiply: 0.1             
@@ -142,7 +148,9 @@ sensor:
     value_type: S_WORD
     web_server:
       sorting_group_id: Diagnostic   
-    unit_of_measurement: C°
+    unit_of_measurement: °C
+    device_class: temperature
+    icon: mdi:thermometer   
     accuracy_decimals: 1
     filters:
       - multiply: 0.1                 
@@ -154,7 +162,9 @@ sensor:
     register_type: holding
     address: 6
     value_type: S_WORD   
-    unit_of_measurement: C°
+    unit_of_measurement: °C
+    device_class: temperature
+    icon: mdi:thermometer   
     accuracy_decimals: 1
     filters:
       - multiply: 0.1  
@@ -164,12 +174,13 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: hp
     name: "C08 Inlet temperature"
-    id: hp_in
+    id: t_in
     register_type: holding
     address: 7
     value_type: S_WORD   
-    unit_of_measurement: C°
+    unit_of_measurement: °C
     device_class: temperature
+    icon: mdi:thermometer   
     accuracy_decimals: 1
     filters:
       - multiply: 0.1    
@@ -183,7 +194,9 @@ sensor:
     register_type: holding
     address: 8
     value_type: S_WORD 
-    unit_of_measurement: C°
+    unit_of_measurement: °C
+    device_class: temperature
+    icon: mdi:thermometer   
     accuracy_decimals: 1  
     filters:
       - multiply: 0.1   
@@ -202,11 +215,11 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: hp
     register_type: holding
-    name: "C14 Refrigerant system failure"
+    name: "C14 Refrigerant system failure" # binary
     address: 13
     value_type: S_WORD
     web_server:
-      sorting_group_id: Diagnostic       
+      sorting_group_id: Development       
 
   - platform: modbus_controller
     modbus_controller_id: hp
@@ -220,12 +233,12 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: hp
     register_type: holding
-    name: "C16 Device output" # binaire code?
+    name: "C16 Device output" # binary
     id: c16
     address: 15
     value_type: U_WORD
     web_server:
-      sorting_group_id: Diagnostic       
+      sorting_group_id: Development       
 
   - platform: modbus_controller
     modbus_controller_id: hp
@@ -244,6 +257,8 @@ sensor:
     address: 17
     value_type: S_WORD
     unit_of_measurement: V
+    device_class: voltage
+    icon: mdi:voltage   
     web_server:
       sorting_group_id: Diagnostic          
 
@@ -254,6 +269,8 @@ sensor:
     address: 18
     value_type: S_WORD
     unit_of_measurement: V
+    device_class: voltage
+    icon: mdi:voltage
     web_server:
       sorting_group_id: Diagnostic       
 
@@ -264,6 +281,8 @@ sensor:
     address: 19
     value_type: S_WORD
     unit_of_measurement: Hz
+    device_class: frequency
+    icon: mdi:frequency
     web_server:
       sorting_group_id: Status       
 
@@ -273,6 +292,7 @@ sensor:
     name: "C21 EEV open degree"
     address: 20
     value_type: S_WORD
+    unit_of_measurement: °
     web_server:
       sorting_group_id: Diagnostic     
 
@@ -284,6 +304,8 @@ sensor:
     address: 22
     value_type: S_WORD
     unit_of_measurement: A
+    device_class: current
+    icon: mdi:current
     accuracy_decimals: 1  
     filters:
       - multiply: 0.1       
@@ -297,6 +319,8 @@ sensor:
     address: 23
     value_type: S_WORD
     unit_of_measurement: A
+    device_class: current
+    icon: mdi:current
     accuracy_decimals: 1  
     filters:
       - multiply: 0.1      
@@ -310,6 +334,7 @@ sensor:
     address: 24
     value_type: S_WORD
     unit_of_measurement: rpm
+    device_class: speed
     web_server:
       sorting_group_id: Status 
 
@@ -320,8 +345,10 @@ sensor:
     address: 25
     value_type: S_WORD
     unit_of_measurement: Hz
+    device_class: frequency
+    icon: mdi:frequency
     web_server:
-      sorting_group_id: Diagnostic       
+      sorting_group_id: Status       
 
   - platform: modbus_controller
     modbus_controller_id: hp
@@ -353,7 +380,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: hp
     register_type: holding
-    name: C30 runtime
+    name: "C30 runtime"
     address: 29
     value_type: U_WORD
     unit_of_measurement: s
@@ -366,10 +393,27 @@ sensor:
     unit_of_measurement: "W"
     device_class: power
     state_class: measurement
+    icon: mdi:power
+    accuracy_decimals: 1
+    update_interval: 5s   
+    lambda: |-
+      return id(ac_voltage).state * id(current).state;
+    web_server:
+      sorting_group_id: Status       
+
+  - platform: template
+    name: "Delta T"
+    id: delta_t
+    unit_of_measurement: °C
+    device_class: temperature
+    state_class: measurement
+    icon: mdi:thermometer
     accuracy_decimals: 1
     update_interval: 5s
     lambda: |-
-      return id(ac_voltage).state * id(current).state;     
+      return id(t_out).state - id(t_in).state;   
+    web_server:
+      sorting_group_id: Status                         
 
 binary_sensor:
 
@@ -379,6 +423,7 @@ binary_sensor:
     register_type: holding
     address: 15
     bitmask: 0x0002
+    icon: mdi:snowflake
 
   - platform: modbus_controller
     modbus_controller_id: hp
@@ -393,6 +438,14 @@ binary_sensor:
     register_type: holding
     address: 15
     bitmask: 0x0100   
+    icon: mdi:snowflake-alert
+
+  - platform: modbus_controller
+    modbus_controller_id: hp
+    name: "Flow error"
+    register_type: holding
+    address: 13
+    bitmask: 0x0080    
 
 select:
 
@@ -472,4 +525,5 @@ number:
     max_value: 18
     step: 1    
     web_server:
-      sorting_group_id: Parameters      
+      sorting_group_id: Parameters
+ 
